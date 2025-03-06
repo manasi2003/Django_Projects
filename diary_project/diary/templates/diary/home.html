@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vintage Diary</title>
+    <link rel="stylesheet" href="{% static 'diary/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>📖 My Personal Diary</h1>
+        <a href="{% url 'add_entry' %}" class="add-btn">➕ Add Entry</a>
+        <div class="entries">
+            {% for entry in entries %}
+                <div class="entry">
+                    <h2>{{ entry.title }}</h2>
+                    <p class="mood">Mood: {{ entry.get_mood_display }}</p>
+                    <p class="content">{{ entry.content }}</p>
+                    <p class="date">{{ entry.created_at }}</p>
+                    <a href="{% url 'delete_entry' entry.id %}" class="delete-btn">❌ Delete</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
